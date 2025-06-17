@@ -9,15 +9,16 @@ def agregar(nombres, correos, telefonos):
             print("el nombre no cumple con los requisitos")
     while True:
         try:
-            telefono = int(input("ingrese su numero celular de 8 digitos"))
-            if len(telefono) == 8: 
+            telefono = (input("ingrese su numero celular de 8 digitos \n"))
+            if  len(telefono) == 8: 
+                telefono = int(telefono)
                 telefonos.append(telefono)
                 print("numero telefonico ingresado correctamente")
                 break
             else:
                 ("numero invalido")            
         except:
-            print("el numero de telefono debe ser numerico")
+            print("el numero de telefono debe ser numerico y de 8 digitos")
     while True:
         correo = input("ingrese su correo")
         if len(correo)>4 and "@" in correo:
@@ -37,10 +38,11 @@ def mostrar(nombres, correos, telefonos):
 def buscar_contacto(lista):
     if len(lista)>0:
         while True:
-            nombre_buscar=input("Ingrese el nombre del contacto que desea buscar")
+            nombre_buscar=input("Ingrese el nombre del contacto que desea buscar \n")
             if len(nombre_buscar)>2:
                 for x,contacto in enumerate(lista):
-                    print(f"{x+1}- Nombre: {contacto}")
+                    if nombre_buscar in contacto: 
+                       print(f"{x+1}- Nombre: {contacto}")
                 break
             else:
                 print("El nombre debe tener mas de 2 caracteres")
@@ -66,4 +68,34 @@ def eliminar_contacto(lista):
         print("No se encuentran contactos registrados")
            
     
-     
+def main():
+    contactos = []
+    emails = []
+    telefonos = []
+
+    while True:
+            print("\n--- Menú de Gestión de Contactos ---")
+            print("1. Agregar un contacto")
+            print("2. Listar contactos")
+            print("3. Buscar un contacto por nombre")
+            print("4. Eliminar un contacto")
+            print("5. Salir del programa")
+            print("------------------------------------")
+
+            opcion = input("Seleccione una opción: ").strip()
+
+            if opcion == '1':
+                agregar(contactos, emails, telefonos)
+                               
+            elif opcion == '2':
+                mostrar(contactos, emails, telefonos)
+            elif opcion == '3':
+                buscar_contacto(contactos)
+            elif opcion == '4':
+                eliminar_contacto(contactos)
+            elif opcion == '5':
+                print("Gracias por usar el programa, ¡Hasta luego!")
+                break  
+            else:
+                print("Opción no válida. Por favor, intente de nuevo.")
+
